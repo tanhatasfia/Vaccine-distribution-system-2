@@ -1,0 +1,26 @@
+---->First downloaded and installed Oracle database in our pcs
+
+---> My PC is - Windows 10 64 bit
+	1)Downloaded XAMPP Version 8.0.6 (x64 bit)
+	2)Downloaded Oracle Instant Client for 64-bit(instantclient-basic-windows.x64-19.11.0.0.0dbru.zip)
+	3)Added path "C:\instantclient_19_11" in system variable
+	4)Downloaded "8.0 Thread Safe (TS) x64" (oci8 3.0.1). the extracted it and added all files with extension .dll, .pdb, pd in C:\xampp\php\ext
+	5)After that, I configured php.ini (uncommented the extension -"extension=php_oci8_12c.dll")
+	After doing all of this I was getting some kind of error.
+
+---> I solved this problem by:
+I found that 8.0 Thread Safe (TS) x64 is causing the problem. So I decided to use oci8 x86 bit instead.
+
+	1)For oci8 x86 bit we need XAMPP(xampp-portable-win32-7.3.2-0-VC15-installer.exe) of Windows 32-bit. (https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/7.3.2/)
+	2)We also need Oracle Instant Client for Windows 32-bit. (https://www.oracle.com/database/technologies/instant-client/microsoft-windows-32-downloads.html), extracted the folder and placed it in the c drive.(add path "C:\instantclient_19_11" in system variable, if you haven't)
+	3)XAMPP of Windows 32-bit is having PHP Version 7.3.2. so I downloaded 7.3 Thread Safe (TS) x86 (https://pecl.php.net/package/oci8/2.2.0/windows), extracted it and replaced the files in C:\xampp\php\ext
+	4)Lastly, I configured php.ini (uncommented the extension -"extension=php_oci8_12c.dll")
+Then I was able to successfully connect my oracle database.
+
+
+#Put the folder(Vaccine-Distribution-System) insie xampp\htdocs
+
+#For connecting with my database we have to give some information; in our case:
+    $username = "project1";     	// Use your username
+    $password = "project1";         // and your password
+    $database = "localhost/XE";   // and the connect string to connect to your database

@@ -1,0 +1,309 @@
+ *** create table *****
+create table people
+(
+    User_NID  varchar(20) ,
+    username varchar(30),
+    gender varchar(8),
+    blood_group  varchar(10),
+    user_phone VARCHAR(15) NOT NULL UNIQUE,
+    birth_date VARCHAR(15),
+    preferable_hospital varchar(50)  NOT NULL ,
+    user_email VARCHAR(30) NOT NULL UNIQUE,
+    user_password VARCHAR(30) NOT NULL,
+    primary key (User_NID)
+);
+
+select User_NID from people;
+
+create table Hospital
+(
+Hospital_id            varchar(50) NOT NULL,
+Hospital_Name           varchar(50),
+Hospital_Location      varchar(50),
+Hospital_Phone         varchar(20),
+Hospital_Company_Email  varchar(30),
+primary key (Hospital_id)
+);
+create table Vaccine
+(
+Vaccine_id            varchar(50) NOT NULL,
+Vaccine_Name          varchar(50),
+Disease_Name          varchar(50),  
+gender_specification  varchar(20),
+Total_dosage          NUMBER(20,0),
+age_limit             NUMBER(20,0), 
+Dosage_Interval       NUMBER(30,0),
+Vaccine_cost          NUMBER(20,5),   
+primary key (Vaccine_id) 
+);
+create table People_Hospital_Vaccine
+(
+User_NID               varchar(50) NOT NULL,
+Hospital_id            varchar(50) NOT NULL,
+Vaccine_id             varchar(50) NOT NULL,
+Vaccination_date       date,
+Remaining_Dosage       NUMBER(10,0),
+Vac_Payment_Status     varchar(10),
+
+foreign key (Vaccine_id) references  Vaccine (Vaccine_id)
+        on delete set null,
+  foreign key (Hospital_id) references Hospital (Hospital_id)
+        on delete set null,  
+   foreign key (User_NID ) references people (User_NID )
+        on delete set null        
+
+);
+create table Hospital_Vaccine
+(
+Vaccine_id            varchar(50) NOT NULL,
+Hospital_id            varchar(50) NOT NULL,
+Total_Distributed      NUMBER(20,0),
+Total_Received         NUMBER(20,0),
+foreign key (Vaccine_id) references  Vaccine (Vaccine_id)
+        on delete set null,
+  foreign key (Hospital_id) references Hospital (Hospital_id)
+        on delete set null      
+);
+create table Local_Vaccine_Producer
+(
+Local_Company_id         varchar(50) NOT NULL,
+Local_Company_Name       varchar(50),
+Local_Phone              varchar(20),
+Local_Location           varchar(40),
+Local_Company_Email      varchar(30),
+primary key (Local_Company_id)
+);
+
+create table Foreign_Vaccine_Distributor
+(
+Foreign_Company_id     varchar(50) NOT NULL,
+Foreign_Company_Name   varchar(50),
+Foreign_Location       varchar(50),
+Foreign_Phone          varchar(20),
+Foreign_Company_Email  varchar(30),
+primary key (Foreign_Company_id)
+);
+
+
+create table Local_Hospital_Vaccine
+(
+Local_Company_id       varchar(50) NOT NULL,
+Hospital_id            varchar(50) NOT NULL,
+Vaccine_id             varchar(50),
+L_Total_Dosages        NUMBER(20,0),
+L_Shipping_Date        NUMBER(20,5),
+L_Total_Cost           NUMBER(30,2),
+L_Paid_Status          varchar(10),
+L_Payment_Date         varchar(50),
+foreign key (Local_Company_id) references   Local_Vaccine_Producer (Local_Company_id)
+        on delete set null,
+foreign key (Vaccine_id) references  Vaccine (Vaccine_id)
+        on delete set null,
+  foreign key (Hospital_id) references Hospital (Hospital_id)
+        on delete set null  
+);
+
+
+create table Foreign_Hospital_Vaccine
+(
+Foreign_Company_id       varchar(50) NOT NULL,
+Hospital_id              varchar(50) NOT NULL,
+Vaccine_id               varchar(50) NOT NULL,
+F_Total_Dosages          NUMBER(20,0),
+F_Shipping_Date          NUMBER(20,5),
+F_Total_Cost             NUMBER(30,2),
+F_Paid_Status            varchar(50),
+F_Payment_Date           varchar(50),
+foreign key (Foreign_Company_id) references   Foreign_Vaccine_Distributor (Foreign_Company_id)
+        on delete set null,
+foreign key (Vaccine_id) references  Vaccine (Vaccine_id)
+        on delete set null,
+  foreign key (Hospital_id) references Hospital (Hospital_id)
+        on delete set null  
+);
+
+***** insert*****
+insert into Hospital values('H00000000001','Square Hospitals Ltd.','Mirpur, Dhaka- 1216','09610707333','info@squarehospital.com');
+insert into Hospital values('H00000000002','Ibn Sina Hospital','Dhanmondi, Dhaka 1209','+88 09610010615','info@ibnsinatrust.com');
+insert into Hospital values('H00000000003','National Institute of Cardiovascular Diseases','Sher-e-Bangla Nagar,Dhaka-1207','+88-02-9122560-74','info@nicvd.com.bd');
+insert into Hospital values('H00000000004','Shaheed Suhrawardy Medical College','Sher-E-Bangla Nagar, Dhaka-1207','+880-2-8144048','admin@shsmc.gov.bd');
+insert into Hospital values('H00000000005','Dhaka Shishu (Children) Hospital','Sher-e-Bangla Nagar, Dhaka-1207,Bangladesh','+88-02-55059051-60','dhakashishu2010@gmail.com');
+insert into Hospital values('H00000000006','National Institute of Ophthalmology','Sher-e-Bangla Nagar, Dhaka-1207,Bangladesh','88-02-9118336','directornio@yahoo.com');
+insert into Hospital values('H00000000007','Dhaka Medical College','Secretariat Rd, Dhaka 1000','+880-2-55165001','principal@dmc.gov.bd');
+insert into Hospital values('H00000000008','National Institute of Cancer Research','Mohakhali, TB Gate Road Dhaka, Bangladesh','+88-02-7913975','Info@Nicrh.Gov.Bd');
+insert into Hospital values('H00000000009','Nari Maitree','33, Malibagh Chowdhurypara, Khilgaon, Dhaka-1219','+88-02-222224573','narimaitree.bd@gmail.com');
+insert into Hospital values('H00000000010','Dhaka Mohanagar General Hospital','Noyabazar,Bangshal,Dhaka','+88-02-57390860','info@dscc.gov.bd');
+insert into Hospital values('H00000000011','Sir Salimullah Medical College','Mitford Rd, Dhaka 1100','+88-05-7315076','ssmc@ac.dghs.gov.bd');
+insert into Hospital values('H00000000012','National Center for Control of Rheumatic Fever','Sher-E-Bangla Nagar, Dhaka-1207','+88-02-58151367','nccrfhd@hospi.dghs.gov.bd');
+
+insert into Vaccine values('V00000000001','ACEL-IMUNE','Tetanus','NULL',3,0,1,1000);
+insert into Vaccine values('V00000000002','ActHIB','Haemophilus influenzae type B','NULL',3,18,12,0);
+insert into Vaccine values('V00000000003','ADACEL','Diphtheria','NULL',1,10,6,0);
+insert into Vaccine values('V00000000004','Cervarix','Human Papillomavirus','NULL',2,12,12,3000);
+insert into Vaccine values('V00000000005','HAVRIX','Hepatitis A','NULL',2,18,6,0);
+insert into Vaccine values('V00000000006','Varivax','Chickenpox or Varicella','NULL',2,6,36,1500);
+
+insert into People_Hospital_Vaccine values('111','H00000000002','V00000000001',to_char(sysdate ,'DD-MON-YYYY'),3,'paid');
+insert into People_Hospital_Vaccine values('12345','H00000000001','V00000000003',12,1,'paid');
+insert into People_Hospital_Vaccine values('1212','H00000000005','V00000000005',12,0,'paid');
+insert into People_Hospital_Vaccine values('201914056','H00000000012','V00000000002',12,2,'paid');
+insert into People_Hospital_Vaccine values('110','H00000000002','V00000000001',12,2,'paid');
+
+insert into Hospital_Vaccine values('V00000000001','H00000000002',50,90);
+insert into Hospital_Vaccine values('V00000000003','H00000000005',60,90);
+insert into Hospital_Vaccine values('V00000000005','H00000000008',10,80);
+insert into Hospital_Vaccine values('V00000000002','H00000000005',24,74);
+insert into Hospital_Vaccine values('V00000000004','H00000000008',20,30);
+
+insert into Local_Vaccine_Producer values('LVP000000001','Advent Pharma Limited','+880-248311655','Kakrali,Dhaka-1000','adventpharmaltd.bd@gmail.com');
+insert into Local_Vaccine_Producer values('LVP000000002','Square Pharmaceuticals Limited','+880-2222283604','Square Centre, Dhaka-1212','info@squarehospital.com');
+insert into Local_Vaccine_Producer values('LVP000000003','Incepta Pharmaceuticals Ltd','+880-28891688','Tejgaon Industrial Area,Dhaka-1208','info@inceptapharma.com');
+insert into Local_Vaccine_Producer values('LVP000000004','Beximco Pharmaceuticals Ltd','+880-258611001','Dhanmondi Residencial Area?,Dhaka-120','info@bpl.net');
+insert into Local_Vaccine_Producer values('LVP000000005','Drug International Limited','+880-29662611','Green Road,Dhaka-1205','info@drug-international.com');
+insert into Local_Vaccine_Producer values('LVP000000006','General Pharmaceuticals Ltd','+880-9639667788','Ring Road,Adabor,Dhaka-1207','info@generalpharma.com');
+insert into Local_Vaccine_Producer values('LVP000000007','Eskayef Pharmaceuticals Ltd','+880-28818327','Gulshan North C/A,Dhaka-1212','query@skf.transcombd.com');
+insert into Local_Vaccine_Producer values('LVP000000008','Healthcare Pharmaceuticals limited','+880-29632175','Bir Uttam CR Datta Road,Dhaka-1205','info@hpl.com.bd');
+insert into Local_Vaccine_Producer values('LVP000000009','Popular Pharmaceuticals Ltd.','+880-29101730','West Panthopath, Dhaka-1207','info@popularbd.com');
+insert into Local_Vaccine_Producer values('LVP000000010','The IBN SINA Pharmaceuticals Ltd.','+880-248122637','Asad Gate, Mirpur Road, Dhaka-1207','info@ibnsinatrust.com');
+insert into Local_Vaccine_Producer values('LVP000000011','Europharma Ltd.','+880-29612910','West Jurain?, Dhaka-1204','info@europharma.com.mt');
+insert into Local_Vaccine_Producer values('LVP000000012','Globe Pharmaceuticals Ltd.','+880-28879300','Tejgaon I/A?, Dhaka-1208','info@globe-uro.com');
+
+insert into Foreign_Vaccine_Distributor values('FVP000000001','GlaxoSmithKline plc','980 Great West Road Brentford, United Kingdom','N/A','gsk.bangladesh-info@gsk.com');
+insert into Foreign_Vaccine_Distributor values('FVP000000002','Heat Biologics','Morrisville, North Carolina, United States','+1 919 240 7133','info@heatbio.com');
+insert into Foreign_Vaccine_Distributor values('FVP000000003','INOVIO','Plymouth Meeting, Pennsylvania, United States','267-440-4200','ino@inovio.com');
+insert into Foreign_Vaccine_Distributor values('FVP000000004','Johnson and Johnson','New Jersey, United States','732-524-0400','media-relations@its.jnj.com');
+insert into Foreign_Vaccine_Distributor values('FVP000000005','Emergent BioSolutions','Gaithersburg, Rockville, Maryland, United States','240-631-3200','medicalinformation@ebsi.com');
+insert into Foreign_Vaccine_Distributor values('FVP000000006','Bavarian Nordic','Bavarian Nordic Switzerland AG, Switzerland','+45 33 26 83 83','info@bavarian-nordic.com');
+insert into Foreign_Vaccine_Distributor values('FVP000000007','Sanofi','54 Rue La Boétie, Paris, France','+880 96 78 000 777','info.BD@sanofi.com');
+insert into Foreign_Vaccine_Distributor values('FVP000000008','Novavax','Gaithersburg, Maryland, United States','(240) 268-2000','busdev@novavax.com');
+insert into Foreign_Vaccine_Distributor values('FVP000000009','Vaxart','Suite 300, South San Francisco, California','+1 650 550 3500','Vaxart@gmail.com');
+
+
+insert into Vaccine values('V00000000007','ACIMUNE','Tetanus','NULL',3,0,1,1000);
+insert into Vaccine values('V00000000008','AIB','Haemophilus influenzae type B','NULL',3,18,12,0);
+insert into Vaccine values('V00000000009','ADL','Diphtheria','NULL',1,10,6,0);
+insert into Vaccine values('V00000000010','CDX','Human Papillomavirus','NULL',2,12,12,3000);
+insert into Vaccine values('V00000000011','HAIX','Hepatitis A','NULL',2,18,6,0);
+insert into Vaccine values('V00000000012','Vaxine','Chickenpox or Varicella','NULL',2,6,36,1500);
+
+insert into Foreign_Hospital_Vaccine values('FVP000000001','H00000000004','V00000000003',1500,15,1000,'paid','15-01-21');
+insert into Foreign_Hospital_Vaccine values('FVP000000002','H00000000008','V00000000005',2000,15,1000,'paid','18-01-21');
+insert into Foreign_Hospital_Vaccine values('FVP000000003','H00000000009','V00000000007',1780,15,1000,'paid','31-05-21');
+insert into Foreign_Hospital_Vaccine values('FVP000000004','H00000000007','V00000000009',1900,15,1000,'paid','14-06-21');
+insert into Foreign_Hospital_Vaccine values('FVP000000009','H00000000010','V00000000011',1500,15,1000,'paid','12-02-21');
+insert into Foreign_Hospital_Vaccine values('FVP000000005','H00000000003','V00000000001',1500,15,1000,'paid','18-01-21');
+
+
+
+insert into Local_Hospital_Vaccine values('LVP000000005','H00000000006','V00000000002',2100,15,1000,'paid','18-05-21');
+insert into Local_Hospital_Vaccine values('LVP000000004','H00000000005','V00000000008',3000,15,1000,'paid','19-04-21');
+insert into Local_Hospital_Vaccine values('LVP000000008','H00000000004','V00000000004',1200,15,1000,'paid','21-04-21');
+insert into Local_Hospital_Vaccine values('LVP000000006','H00000000009','V00000000006',3200,15,1000,'paid','30-03-21');
+insert into Local_Hospital_Vaccine values('LVP000000009','H00000000011','V00000000010',2000,15,1000,'paid','11-01-21');
+insert into Local_Hospital_Vaccine values('LVP000000001','H00000000003','V00000000012',1800,15,1000,'paid','15-03-21');
+BASIC QUERIES:
+
+1. select vaccine_id from vaccine where vaccine_name = 'ACEL-IMUNE';
+
+2. select * from hospital_vaccine where hospital_id = 'H00000000008' and
+vaccine_id = 'V00000000012';
+
+3. select * from Hospital_Vaccine hv inner join vaccine v on hv.vaccine_id =
+v.vaccine_id where vaccine_name = 'ACEL-IMUNE';
+
+4. select Remaining_Dosage from Vaccine V inner join
+People_Hospital_Vaccine PHV on V.Vaccine_id=PHV.Vaccine_id
+where disease_name='Diphtheria' and User_NID='110';
+
+5. select Disease_Name,Vaccine_Name,Vaccine_cost,Hospital_Name
+from Vaccine V inner join People_Hospital_Vaccine PHV on
+V.Vaccine_id=PHV.Vaccine_id inner join Hospital H on
+PHV.Hospital_ID=H.Hospital_ID
+where User_NID='12345';
+
+6. select vaccine_name
+from Vaccine V inner join Hospital_Vaccine HV on
+V.Vaccine_id=HV.Vaccine_id inner
+join Hospital H on HV.Hospital_ID=H.Hospital_ID
+where disease_name='" . $dis_name . "' and hospital_name='" .
+$hospital_name . "' and
+total_received-total_distributed>0;
+
+7. select sum(FT-ST)
+from (select F_Total_Dosages FT from Foreign_Hospital_Vaccine FHV
+inner join Vaccine V on FHV.Vaccine_id=V.Vaccine_id
+where vaccine_name='HAVRIX' and v.vaccine_id in('V00000000005'))
+NATURAL JOIN
+(select sum(Total_Received) ST
+from Hospital H inner join Hospital_Vaccine HV on
+H.Hospital_ID=HV.Hospital_ID
+inner join Vaccine V on HV.Vaccine_id=V.Vaccine_id
+where vaccine_name='HAVRIX' and v.vaccine_id in('V00000000005'));
+
+
+
+Query forTRIGGER AND TABLE BASED RECORD:
+create or replace trigger person_faltu
+after insert or update
+on hospital_vaccine
+for each row
+when(new.Total_Received>0)
+declare
+log_a NUMBER(20,0);
+log_b NUMBER(20,0);
+vaccine_rec vaccine%ROWTYPE;
+hospital_rec hospital%ROWTYPE;
+hos_vac_rec hospital_vaccine%ROWTYPE;
+log_action varchar2(50);
+BEGIN
+select * into vaccine_rec from vaccine where vaccine_id= :new.vaccine_id;
+
+
+Query for EXCEPTION using PROCEDURE:
+CREATE OR REPLACE procedure check_num(phn_no IN varchar)
+AS
+invalid_inp exception;
+BEGIN
+IF length(phn_no)!=11 THEN
+RAISE invalid_inp;
+else
+update temp set temp_val=0;
+END IF;
+EXCEPTION
+WHEN invalid_inp THEN
+update temp set temp_val=1;
+END;
+begin check_num('01718873994');
+end;
+set SERVEROUT on;
+EXECUTE check_num('1234567891');
+
+SEQUENCES:
+
+
+
+
+1.	Hospital:
+CREATE SEQUENCE hospital_id_sq
+START WITH 15
+MAXVALUE 99
+INCREMENT BY 1;
+
+insert into hospital values('H000000000'||hospital_id_sq.nextval,'Siq Hospitals Ltd.','Mdpur, Dhaka- 1207','09667807333','info@sihospital.com');
+
+2.	Local_Vaccine_Producer:
+CREATE SEQUENCE local_id_sq
+START WITH 13
+MAXVALUE 99
+INCREMENT BY 1;
+
+insert into Local_Vaccine_Producer values('LVP0000000'||local_id_sq.nextval,'Ad Ph Lim','+880-248398655','Ka,Dhaka-1000','advenltd.bd@gmail.com');
+
+3.	Foreign_Vaccine_Distributor:
+CREATE SEQUENCE foreign_id_sq
+START WITH 10
+MAXVALUE 99
+INCREMENT BY 1;
+
+insert into Foreign_Vaccine_Distributor values('FVP0000000'||foreign_id_sq.nextval,'Va','South San Francisco, California','+1 650 998 3500','e@b.com');
+

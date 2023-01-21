@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" a href="bootstrap/css/css3.css">
+    <link rel="stylesheet" href="bootstrap\css\font-awesome-5.8.1.css">
+    <link rel="stylesheet" href="bootstrap\css\bootstrap.css">
+    <link rel="stylesheet" href="bootstrap\css\mdb.css">
+    <link rel="stylesheet" href="bootstrap\css\style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <title>Vaccine Distribution</title>
+</head>
+
+<body>
+
+    <!-- Nav bar-->
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-teal fixed-top">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <i class="fa fa-plane-departure"></i> Vaccine Distribution</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#travel-navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="travel-navbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item px-3">
+                        <a href="#" class="nav-link">
+                            <h4>Home</h4>
+                        </a>
+                    </li>
+
+                    <li class="nav-item px-3">
+                        <a href="registration.html" class="nav-link">
+                            <h4>Registration</h4>
+                        </a>
+                    </li>
+                    <li class="nav-item px-3">
+                        <ul><button class="menu-btn"><h3 style="display:ruby-base-container;">Login</h3></button>
+                            <li style="text-align: left;" ><a href="login.html"> <h5 >User</h5></a></li>
+                            <li style="text-align: left;"><a  href="admin.html"><h5>Admin</h5></a></li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Area -->
+    <section>
+        <div class="container" >
+            <div class="row justify-content-center" data-aos="zoom-out-left">
+                <div class="col-md-6" data-aos="zoom-out-right">
+                    <div class="login-box">
+                        <div class="title">
+                            <h3>Register new account</h3>
+                        </div>
+                        <form action="process.php" method="POST" class="form-1">
+                            <div class="row mt-4 form-group">
+                                <div class="col-12">
+                                    <label>National ID Number</label>
+                                    <input type="text" placeholder="National ID Number" name="nid">
+                                </div>
+                            </div>
+                            <div class="row mt-4 form-group">
+                                <div class="col-12">
+                                    <label>Full Name</label>
+                                    <input type="text" placeholder="Full name" name="fullname">
+                                </div>
+                            </div>
+                            <div class="row mt-4 form-group">
+                                <div class="col-12">
+                                    <label>Blood Group</label>
+                                    <input type="text" placeholder="blood" name="blood">
+                                </div>
+                            </div>
+                            <div class="row mt-4 form-group">
+                                <div class="col-12">
+                                    <label>Email</label>
+                                    <input type="email" placeholder="Email" name="email">
+                                </div>
+                            </div>
+                            <div class="row mt-4 form-group">
+                                <div class="col-12">
+                                    <label>Phone Number</label>
+                                    <input type="tel" placeholder="Phone Number" name="phone">
+                                </div>
+                            </div>
+                            <div class="row mt-4 form-group">
+                                <div class="col-12">
+                                    <label>Preferable Hospital Address</label>
+                                    <textarea name="pre_address" rows="3" placeholder="Address"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mt-4 form-group">
+                                <div class="col-6">
+                                    <label>Gender</label>
+                                    <select name="gender">
+                                        <option value="" hidden>Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label>Date of Birth</label>
+                                    <input type="date" name="birthdate" placeholder="Date of birth">
+                                </div>
+                            </div>
+                            <div class="row mt-4 form-group">
+                                <div class="col-12">
+                                    <label>Password</label>
+                                    <input type="password" placeholder="Password" name="password">
+                                </div>
+                            </div>
+                            <div class="row mt-4 form-group">
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn-2" input type="submit" name="save" value="submit">Register</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6 side-image-2 d-none d-md-block">
+                    <img src="images/bang_04.jpg" alt="Login">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End -->
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="p-3">
+        <div class="container" data-aos="zoom-out-right">
+            <div class="card mt-3">
+                <div class="card-body bg-teal text-center text-white">
+                    <i class="fa fa-envelope fa-4x"></i>
+                    <h2>Contact address</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque excepturi itaque praesentium. Accusamus beatae distinctio dolore eum iure magnam maiores maxime, natus quam repellendus saepe sint suscipit temporibus
+                        vitae voluptates?</p>
+                </div>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h3>Location</h3>
+                </li>
+                <li class="list-group-item">
+                    Rangpur Cantonment, Rangpur Sadar, Rangpur, Bangladesh.
+                </li>
+                <li class="list-group-item">
+                    Contact No: 01xxxxxxxxx
+                </li>
+                <li class="list-group-item">
+                    Email: rakibmistcse19@gmail.com
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Main Footer -->
+    <footer class="p-3 mt-3 bg-teal text-white text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h3>Copyright &copy; 2021 ,Bangladesh Goverment</h3>
+                    <h6>All Rights Reserved</h6>
+                    <h6>Developed & Maintained by Rakib,Aliya,Tanha</h6>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- bootstrap Js file -->
+    <script src="bootstrap\js\jquery.js"></script>
+    <script src="bootstrap\js\popper.min.js"></script>
+    <script src="bootstrap\js\bootstrap.js"></script>
+    <script src="bootstrap\js\mdb.js"></script>
+    <script>
+        $('.carousel').carousel({
+            interval: 3200,
+            pause: 'hover'
+        });
+    </script>
+    <script type="text/javascript">
+        AOS.init({
+            duration: 1500,
+        })
+    </script>
+</body>
+
+</html>
